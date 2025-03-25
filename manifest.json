@@ -1,0 +1,81 @@
+{
+"update_url": "https://clients2.google.com/service/update2/crx",
+
+    "version": "0.01",
+    "manifest_version": 3,
+    "name": "Modern for Wikipedia",
+    "short_name": "Modern for Wikipedia",
+    "description": "Wikipedia gets a beautiful, clean, modern interface.",
+    "action": {
+        "default_title": "Modern for Wikipedia",
+		"default_icon": {
+	        "16": "images/icon_16.png",
+	        "48": "images/icon_48.png",
+	        "96": "images/icon_96.png",
+	        "128": "images/icon_128.png",
+	        "256": "images/icon_256.png"
+		},
+        "default_popup": "popup.html"
+    },
+    "icons": {
+        "16": "images/icon_16.png",
+        "48": "images/icon_48.png",
+        "96": "images/icon_96.png",
+        "128": "images/icon_128.png",
+        "256": "images/icon_256.png"
+    },
+    "permissions": [
+		"tabs",
+		"storage"
+    ],
+    "host_permissions": [
+        "https://*.wikipedia.org/"
+    ],
+    "optional_host_permissions": [
+        "*://*/*"
+    ],
+    "background": {
+        "service_worker": "background.js",
+        "type": "module"
+    },
+    "content_scripts": [
+        {
+            "matches": [
+                "*://*.wikipedia.org/*"
+            ],
+            "js": [
+                "content_start.js"
+            ],
+            "run_at": "document_start"
+        },
+        {
+            "matches": [
+                "*://*.wikipedia.org/*"
+            ],
+            "js": [
+                "jquery-3.7.1.min.js",
+                "content.js"
+            ],
+            "run_at": "document_end"
+        }
+    ],
+    "web_accessible_resources": [
+        {
+            "resources": [
+                "images/*"
+            ],
+            "matches": [
+                "*://*/*"
+            ]
+        },
+        {
+            "resources": [
+              "content.css"
+            ],
+            "matches": [
+                "*://*/*"
+            ]
+        }
+    ]
+}
+
